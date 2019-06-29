@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<script type="text/javascript" src="/js/jquery-1.4.1.min.js"></script>
+
+<body>
+
+    <input type="text" id="txtValue1" name="txtValue1">
+    <button type="button" onclick="setValue11();">計算1</button>
+    <input type="text" id="txtValue2" name="txtValue2">
+    <button type="button" onclick="setValue22();">計算2</button>
+    <div id="divValue1"></div>
+    <div id="divValue2"></div>
+</body>
+
+<head>
+    <script>
+        function setValue11() {
+            const n = parseInt($("#txtValue1").val(), 10)
+            let i = 0
+            const res = []
+            let r = ''
+            while (i < n) {
+                i++
+                if (i % 3 === 0) r += 'a'
+                if (i % 5 == 0) r += 'b'
+
+                if (!r) r = i
+
+                res.push(r)
+                r = ''
+            }
+
+            $("#divValue1").empty();
+            $("#divValue1").append("<font>計算一結果：</font>" + res.toString());
+
+        }
+
+        function setValue1() {
+            var _intValue = $("#txtValue1").val();
+            var i = 0; // 迴圈用
+            var j = 1; // 數字用
+            var result1 = "";
+            var result2 = ""; // 計算多字串
+
+            for (i = 0; i <= _intValue - 1; i++) {
+                if (j % 15 == 0) {
+                    result1 = "ab";
+                } else if (j % 5 == 0) {
+                    result1 = "b";
+                } else if (j % 3 == 0) {
+                    result1 = "a";
+                } else {
+                    result1 = (j).toString();
+                }
+                result2 += result1 + ",";
+                j++;
+            }
+
+            // 顯示
+            $("#divValue1").empty();
+            $("#divValue1").append("<font>計算一結果：</font>" + result2);
+        }
+
+        function setValue22() {
+            let n = parseInt($("#txtValue2").val(), 10)
+            const dict = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+
+            let res = ''
+
+            while (n > 0) {
+                n--
+                res = `${dict[n % 26]}${res}`
+
+                n = Math.floor(n / 26)
+            }
+
+            $("#divValue2").empty();
+            $("#divValue2").append("<font>計算二結果：</font>" + res);
+        }
+
+        function setValue2() {
+            var _intValue = $("#txtValue2").val();
+            var intResult1 = 0;
+            var intResult2; // 陣列
+            var strResult3 = ""; // 結果
+            var arrResult4;
+            var strResult4 = "";
+            var i = 0; //迴圈計算
+            var j = 0; //英文位置
+
+            if (_intValue > 26) {
+                do {
+                    intResult1 = Math.floor(_intValue % 26); // 餘數
+                    _intValue = parseInt(_intValue / 26); // 結果
+                    strResult3 += "," + intResult1.toString();
+                    if (_intValue <= 26) {
+                        strResult3 = _intValue + strResult3;
+                        break;
+                    }
+                }
+                while (_intValue > 26)
+            } else {
+                strResult3 = _intValue;
+            }
+            arrResult4 = strResult3.split(",");
+            for (i = 0; i < arrResult4.length; i++) {
+                strResult4 += setEnType(arrResult4[i]);
+            }
+            // 顯示
+            $("#divValue2").empty();
+            $("#divValue2").append("<font>計算二結果：</font>" + strResult4);
+        }
+
+        //英文轉換
+        function setEnType(_intValue) {
+            var arrEn = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+            var strEn = arrEn[_intValue - 1];
+            return strEn;
+        }
+    </script>
+</head>
+
+</html>
